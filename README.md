@@ -7,3 +7,9 @@ search #devOpsInitiative
 * [todobackend](https://github.com/abhishek-jaiswal/todobackend) python app
 * [acceptance-test](https://github.com/abhishek-jaiswal/acceptance-test) front end acceptance test
 
+
+### Continious Delivery Workflow
+
+![continious delivery workflow](images/cdr.png "Continious Delivery Workflow")
+
+
