@@ -29,7 +29,7 @@ search #devOpsInitiative
   pushd docker-ansible && docker build -t abhishekk/ansible . && popd
   
   # Build the Development Image
-  pushd todobackend/docker/dev/ && docker-compose up agent && docker-compose up builder && docker-compose up test && popd
+  pushd todobackend/docker/dev/ && docker-compose up agent && docker-compose up test && popd
   
 ```
 ![Test Environment](images/test_env.png "Test Environment Workflow")
@@ -40,11 +40,24 @@ search #devOpsInitiative
 
 ### 2. Build
 
-### 1. Release
-```sh  
-  # build the Acceptance test image 
+In Build Section we do all the building part of our workflow
+```sh
+# build the Acceptance test image 
   pushd acceptance-test && docker build -t abhishekk/acceptance-test . && popd
+  
+  # build the which create all release dependency in python wheels
+  docker-compose up builder
+  
+```
 
+![Build Environment](images/build_env.png "Build Environment Workflow")
+
+at this point we had build our application atrifacts and published to a local folder that can be consumed by the relased stage as described in below image
+
+![Publishing Artifacts](images/publishing_artifacts.png "Publishing Artifacts")
+
+### 3. Release
+```sh
   pushd todobackend/docker/release/
   
   # clear any exiting build and clean the environment
