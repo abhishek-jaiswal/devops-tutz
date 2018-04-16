@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    #this tasks because from office some of mirrors is not reachable
+    - name: Replace source list
+      copy:
+        src: files/sources.list
+        dest: /etc/apt/sources.list
+        backup: yes
+    - name: Install NGINX
+      apt: package=nginx state=present update_cache=yes
+      tags: nginx
+      notify:
+      - restart nginx
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted enabled=yes
